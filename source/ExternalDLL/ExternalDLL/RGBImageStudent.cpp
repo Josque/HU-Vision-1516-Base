@@ -3,6 +3,7 @@
 RGBImageStudent::RGBImageStudent() : RGBImage() {
 	int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
 	//TODO: Nothing
+	//done!
 }
 
 RGBImageStudent::RGBImageStudent(const RGBImageStudent &other) : RGBImage(other.getWidth(), other.getHeight()) {
