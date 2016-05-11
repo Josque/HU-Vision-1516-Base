@@ -7,6 +7,7 @@
 #include "RGBImagePrivate.h"
 #include <algorithm>
 #include <iostream>
+
 RGBImagePrivate::RGBImagePrivate():
 
 RGBImage(){}
