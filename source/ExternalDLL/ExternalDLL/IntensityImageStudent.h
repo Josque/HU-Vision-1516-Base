@@ -24,7 +24,6 @@ public:
 	Intensity getPixel(int i) const;
 
 	void clear(Intensity pixel);
-
 	void clear();
 
 private:

@@ -26,6 +26,6 @@ public:
 private:
 
 	RGB* storage;
-	int storagewitdh;
-	int storageheight;
+	int storageWitdh;
+	int storageHeight;
 };

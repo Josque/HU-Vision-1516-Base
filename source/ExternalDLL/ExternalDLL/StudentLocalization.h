@@ -6,9 +6,18 @@
 
 #pragma once
 #include "Localization.h"
+#include "IntensityImageStudent.h"
+#include "Feature.h"
+#include "Point2D.h"
+
 class StudentLocalization :
 	public Localization {
 public:
+
+	static int * getHistogramX(const IntensityImage & image, int alpha, int startY);
+	static int getTopOfHead(const IntensityImage & image);
+
+	static void findSidesInHistogram(int * histogram, int size, int * first, int * last);
 
 	bool stepFindHead(const IntensityImage &image, FeatureMap &features) const;
 	bool stepFindNoseMouthAndChin(const IntensityImage &image, FeatureMap &features) const;

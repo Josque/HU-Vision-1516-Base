@@ -111,3 +111,11 @@ Intensity IntensityImageStudent::getPixel(int i) const {
 	//TODO: see setPixel(int i, RGB pixel)
 	return storage[i];
 }
+
+void IntensityImageStudent::clear(Intensity pixel) {
+	std::fill_n(storage, storageWidth * storageHeight, pixel);
+}
+
+void IntensityImageStudent::clear() {
+	clear(255);
+}
