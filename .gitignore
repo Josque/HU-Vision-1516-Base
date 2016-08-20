@@ -2,3 +2,5 @@
 source/ExternalDLL/ExternalDLL2015.VC.db
 source/ExternalDLL/ExternalDLL2015.VC.VC.opendb
 *.vcxproj
+source/ExternalDLL/ExternalDLL/ExternalDLL2015.vcxproj
+source/ExternalDLL/ExternalDLL/ExternalDLL2015.vcxproj.filters
