@@ -10,6 +10,7 @@ class IntensityImageStudent : public IntensityImage {
 public:
 	IntensityImageStudent();
 	IntensityImageStudent(const IntensityImageStudent &other);
+	IntensityImageStudent(const IntensityImage & other);
 	IntensityImageStudent(const int width, const int height);
 	~IntensityImageStudent();
 
@@ -22,8 +23,12 @@ public:
 	Intensity getPixel(int x, int y) const;
 	Intensity getPixel(int i) const;
 
+	void clear(Intensity pixel);
+
+	void clear();
+
 private:
 	Intensity* storage;
-	int storagewidht;
-	int storageheight;
+	int storageWidth;
+	int storageHeight;
 };

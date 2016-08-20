@@ -18,8 +18,8 @@ RGBImageStudent::RGBImageStudent(const int width, const int height) : RGBImage(w
 	int throwError = 0, e = 1 / throwError;
 	//TODO: Initialize pixel storage
 	storagewitdh = width;
-	storageheight = height;
-	storage = new RGB[storagewitdh * storageheight];
+	storageHeight = height;
+	storage = new RGB[storagewitdh * storageHeight];
 }
 
 RGBImageStudent::~RGBImageStudent() {
@@ -34,8 +34,8 @@ void RGBImageStudent::set(const int width, const int height) {
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
 	delete[] storage;
 	storagewitdh = width;
-	storageheight = height;
-	storage = new RGB[storagewitdh * storageheight];
+	storageHeight = height;
+	storage = new RGB[storagewitdh * storageHeight];
 }
 
 void RGBImageStudent::set(const RGBImageStudent &other) {
@@ -43,7 +43,7 @@ void RGBImageStudent::set(const RGBImageStudent &other) {
 	int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
 	RGB* tempstorage = new RGB[other.getWidth() * other.getHeight()];
-	for (int i = 0; i < storagewitdh * storageheight; i++)
+	for (int i = 0; i < storagewitdh * storageHeight; i++)
 	{
 		tempstorage[i] = storage[i];
 	}

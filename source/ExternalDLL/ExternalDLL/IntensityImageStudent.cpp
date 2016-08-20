@@ -2,12 +2,12 @@
 #include <iostream>
 
 IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
-	int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
+	//int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
 	//TODO: Nothing
 }
 
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: Create a copy from the other object
 
 	int size = other.getWidth() * other.getHeight();
@@ -20,51 +20,62 @@ IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other)
 
 }
 
+IntensityImageStudent::IntensityImageStudent(const IntensityImage &other) : IntensityImage(other.getWidth(), other.getHeight()) {
+	//TODO: Create a copy from the other object
+	
+	int size = other.getHeight() * other.getWidth();
+	this->set(other.getHeight(), other.getWidth());
+	std::cout << this->getWidth() << 'x' << this->getHeight() << '\n';
+	for (int i = 0; i < size; i++) {
+		this->setPixel(i, other.getPixel(i));
+	}
+}
+
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: Initialize pixel storage
-	storagewidht = width;
-	storageheight = height;
-	storage = new Intensity[storagewidht * storageheight];
+	storageWidth = width;
+	storageHeight = height;
+	storage = new Intensity[storageWidth * storageHeight];
 }
 
 IntensityImageStudent::~IntensityImageStudent() {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: delete allocated objects
 	delete[] storage;
 }
 
 void IntensityImageStudent::set(const int width, const int height) {
 	IntensityImage::set(width, height);
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
 	delete[] storage;
-	storagewidht = width;
-	storageheight = height;
-	storage = new Intensity(storagewidht * storageheight);
+	storageWidth = width;
+	storageHeight = height;
+	storage = new Intensity(storageWidth * storageHeight);
 }
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	IntensityImage::set(other.getWidth(), other.getHeight());
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
-	Intensity* tempstorage = new Intensity[other.getWidth() * other.getHeight()];
-	for (int i = 0; i < storagewidht * storageheight; i++)
+	Intensity* tempStorage = new Intensity[other.getWidth() * other.getHeight()];
+	for (int i = 0; i < storageWidth * storageHeight; i++)
 	{
-		tempstorage[i] = storage[i];
+		tempStorage[i] = storage[i];
 	}
 	delete[] storage;
-	storage = tempstorage;
+	storage = tempStorage;
 }
 
 void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
-	setPixel((y * storagewidht + x), pixel);
+	setPixel((y * storageWidth + x), pixel);
 }
 
 void IntensityImageStudent::setPixel(int i, Intensity pixel) {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	/*
 	* TODO: set pixel i in "Row-Major Order"
 	*
@@ -90,13 +101,13 @@ void IntensityImageStudent::setPixel(int i, Intensity pixel) {
 }
 
 Intensity IntensityImageStudent::getPixel(int x, int y) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
-	return storage[(y * storagewidht + x)];
+	return storage[(y * storageWidth + x)];
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {
-	int throwError = 0, e = 1 / throwError;
+	//int throwError = 0, e = 1 / throwError;
 	//TODO: see setPixel(int i, RGB pixel)
 	return storage[i];
 }
