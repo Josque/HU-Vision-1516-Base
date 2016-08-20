@@ -108,8 +108,8 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 IntensityImage * StudentPreProcessing::stepThresholding(const IntensityImage &image) const {
 	int T = 40;
 	IntensityImageStudent * newImage = new IntensityImageStudent(image.getWidth(), image.getHeight());
-	for (int x = 0; x < image.getWidth; x++) {
-		for (int y = 0; y < image.getHeight; y++){
+	for (int x = 0; x < image.getWidth(); x++) {
+		for (int y = 0; y < image.getHeight(); y++){
 			int oldPixel = image.getPixel(x, y);
 			if (oldPixel < T){
 				newImage->setPixel(x, x, 255);
