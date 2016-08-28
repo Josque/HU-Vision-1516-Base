@@ -4,6 +4,7 @@
 IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 	//int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
 	//TODO: Nothing
+	//done
 }
 
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
@@ -11,7 +12,7 @@ IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other)
 	//TODO: Create a copy from the other object
 
 	int size = other.getWidth() * other.getHeight();
-	this->set(other.getHeight(), other.getWidth());
+	this->set(other.getWidth(), other.getHeight());
 	std::cout << this->getWidth() << 'x' << this->getHeight() << 'y';
 	for (int i = 0; i < size; i++)
 	{
@@ -23,8 +24,8 @@ IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other)
 IntensityImageStudent::IntensityImageStudent(const IntensityImage &other) : IntensityImage(other.getWidth(), other.getHeight()) {
 	//TODO: Create a copy from the other object
 	
-	int size = other.getHeight() * other.getWidth();
-	this->set(other.getHeight(), other.getWidth());
+	int size = other.getWidth() * other.getHeight();
+	this->set(other.getWidth(), other.getHeight());
 	std::cout << this->getWidth() << 'x' << this->getHeight() << '\n';
 	for (int i = 0; i < size; i++) {
 		this->setPixel(i, other.getPixel(i));
@@ -71,7 +72,7 @@ void IntensityImageStudent::set(const IntensityImageStudent &other) {
 void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
-	setPixel((y * storageWidth + x), pixel);
+	setPixel(((y * storageWidth) + x), pixel);
 }
 
 void IntensityImageStudent::setPixel(int i, Intensity pixel) {
@@ -103,7 +104,7 @@ void IntensityImageStudent::setPixel(int i, Intensity pixel) {
 Intensity IntensityImageStudent::getPixel(int x, int y) const {
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: no comment needed :)
-	return storage[(y * storageWidth + x)];
+	return storage[((y * storageWidth) + x)];
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {
