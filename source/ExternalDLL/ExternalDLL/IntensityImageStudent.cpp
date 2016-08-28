@@ -53,14 +53,14 @@ void IntensityImageStudent::set(const int width, const int height) {
 	delete[] storage;
 	storageWidth = width;
 	storageHeight = height;
-	storage = new Intensity(storageWidth * storageHeight);
+	storage = new Intensity[storageWidth * storageHeight];
 }
 
 void IntensityImageStudent::set(const IntensityImageStudent &other) {
 	IntensityImage::set(other.getWidth(), other.getHeight());
 	//int throwError = 0, e = 1 / throwError;
 	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
-	Intensity* tempStorage = new Intensity[other.getWidth() * other.getHeight()];
+	Intensity* tempStorage = new Intensity[(other.getWidth() * other.getHeight())];
 	for (int i = 0; i < storageWidth * storageHeight; i++)
 	{
 		tempStorage[i] = storage[i];
