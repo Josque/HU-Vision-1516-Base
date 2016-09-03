@@ -1,6 +1,5 @@
 #include "StudentLocalization.h"
-
-int * StudentLocalization::getHistogramX(const IntensityImage &image, int alpha, int startY) {
+/*int * StudentLocalization::getHistogramX(const IntensityImage &image, int alpha, int startY) {
 	int * histogram = new int[image.getWidth()];
 
 	// Make array filled with zero's
@@ -21,6 +20,30 @@ int * StudentLocalization::getHistogramX(const IntensityImage &image, int alpha,
 	}
 
 	return histogram;
+}*/
+
+std::shared_ptr<map_histogram>  StudentLocalization::getHistogramX(const IntensityImage & image, int alpha, int startY) {
+	std::shared_ptr<map_histogram> histogram(new map_histogram);
+
+	int maxY = startY + alpha;
+	if (maxY > image.getHeight()) {
+		maxY = image.getHeight();
+	}
+
+	for (int  x = 0; x < image.getWidth(); x++)
+	{
+		for (int y = startY; y < maxY; y++) {
+			if (image.getPixel(x, y) == 0) {
+				if (histogram->count(x) == 0) { //key not yet in histogram, add it!
+					(*histogram)[x] = 1;
+				}
+				else {
+					(*histogram)[x] ++;
+				}
+			}
+		}
+	}
+	return histogram;
 }
 
 int StudentLocalization::getTopOfHead(const IntensityImage &image) {
@@ -34,15 +57,15 @@ int StudentLocalization::getTopOfHead(const IntensityImage &image) {
 	return -1;
 }
 
-void StudentLocalization::findSidesInHistogram(int* histogram, int size, int* first, int * last) {
+void StudentLocalization::findSidesInHistogram(std::shared_ptr<map_histogram> histogram, int size, int* first, int * last) {
 	int threshold = 4;
 	int subsequentEdge = 0;
 	int subsequentThreshold = 2;
 	*first = -1;
 	*last = -1;
 
-	for (int x = 0; x < size; x++) {
-		if (histogram[x] > threshold) {
+	/*for (int x = 0; x < size; x++) {
+		if ((*histogram)[x] > threshold) {
 			subsequentEdge++;
 		}
 		else {
@@ -56,6 +79,24 @@ void StudentLocalization::findSidesInHistogram(int* histogram, int size, int* fi
 			}
 			subsequentEdge = 0;
 		}
+	}*/
+
+	map_histogram::iterator it;
+	for (it = histogram->begin(); it != histogram->end(); it++) {
+		if (it->second > threshold) {
+			subsequentEdge++;
+		}
+		else {
+			if (subsequentEdge > subsequentThreshold) {
+				if (*first == -1) {
+					*first = it->first - (subsequentEdge / 2);
+				}
+				else {
+					*last = it->first - (subsequentEdge / 2);
+				}
+			}
+			subsequentEdge = 0;
+		}
 	}
 }
 
@@ -64,7 +105,7 @@ void StudentLocalization::findSidesInHistogram(int* histogram, int size, int* fi
 bool StudentLocalization::stepFindHead(const IntensityImage &image, FeatureMap &features) const {
 	int yTop = getTopOfHead(image);
 	int alpha = 13;
-	int* histogram;
+	//std::shared_ptr<map_histogram>  histogram;
 	int left, right;
 	int diffFirstLast = -1, maxDiffFirstLast = -1;
 	int ySides = -1;
@@ -72,7 +113,8 @@ bool StudentLocalization::stepFindHead(const IntensityImage &image, FeatureMap &
 	int count = ((image.getHeight() - yTop - 1) / alpha) + 1;
 
 	for (int i = 0; i < count; i++) {
-		histogram = getHistogramX(image, alpha, yTop + i * alpha);
+		//histogram = getHistogram(image, alpha, yTop + i * alpha);
+		std::shared_ptr<map_histogram> histogram = getHistogramX(image, alpha, yTop + i*alpha);
 		findSidesInHistogram(histogram, image.getWidth(), &left, &right);
 		if (left == -1 || right == -1) {
 			continue;
